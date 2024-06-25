@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from './Navbar';
 
 
 function QuoteSection() {
@@ -34,7 +35,7 @@ function Home() {
 
   return (
     <>
-      
+      <Navbar/>
       <h1 className="md:font-serif mr-6 font-serif mt-40 font-bold md:pt-13  lg:ml-32 pl-12 text-3xl  md:text-6xl">Efficiencia: Master Your Day</h1>
       <p className='md:font-serif font-serif lg:ml-32 pl-12 md:mt-4 mt-3 text-1xl md:text-2xl'>Where Your Daily To-Dos Transform into Daily Triumphs</p>
       {/* TIME */}

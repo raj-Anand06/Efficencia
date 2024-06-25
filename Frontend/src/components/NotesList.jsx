@@ -1,5 +1,6 @@
 import Note from './Note';
 import AddNote from './AddNote';
+import Navbar from './Navbar';
 
 const NotesList = ({
     notes,
@@ -7,6 +8,8 @@ const NotesList = ({
     handleDeleteNote,
 }) => {
     return (
+        <>
+        
         <div className='notes-list'>
             {notes.map((note) => (
                 <Note
@@ -19,6 +22,7 @@ const NotesList = ({
             ))}
             <AddNote handleAddNote={handleAddNote} />
         </div>
+        </>
     );
 };
 

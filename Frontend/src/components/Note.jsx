@@ -1,7 +1,10 @@
 import { MdDeleteForever } from 'react-icons/md';
+import Navbar from './Navbar';
 
 const Note = ({ id, text, date, handleDeleteNote }) => {
 	return (
+		<>
+		
 		<div className='note'>
 			<span>{text}</span>
 			<div className='note-footer'>
@@ -13,6 +16,7 @@ const Note = ({ id, text, date, handleDeleteNote }) => {
 				/>
 			</div>
 		</div>
+		</>
 	);
 };
 
