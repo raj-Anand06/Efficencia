@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import { BsCheckLg } from 'react-icons/bs';
 import QsnFetcher from './QsnFetcher';
-import Navbar from './Navbar';
 
 function Efficiency() {
   const [isCompleteScreen, setIsCompleteScreen] = useState(false);
@@ -100,7 +99,6 @@ function Efficiency() {
 
   return (
     <>
-    <Navbar/>
       <h1 className="text-4xl mr-3 mt-4 font-serif md:ml-96 ml-2 md:translate-x-5 font-bold">
         Visualize, Organize, Actualize: List it & Do it!
       </h1>
