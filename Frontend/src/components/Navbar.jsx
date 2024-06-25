@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Login from './Login';
+import Logout from './Logout';
+import { useAuth } from '../context/AuthProvider';
 
 function Navbar() {
+  const [authUser,setAuthUser]=useAuth()
   const navItems = (
     <>
       
@@ -15,9 +19,7 @@ function Navbar() {
     </>
   );
 
-  const [theme, setTheme] = useState(
-    localStorage.getItem("theme") || "dark"
-  );
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   const handleToggle = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -46,7 +48,7 @@ function Navbar() {
               {navItems}
             </ul>
           </div>
-          <a className="md:text-5xl lg:ml-30  mr-6  text-3xl font-bold cursor-pointer mt-2 gradient-text">efficiEncia</a>
+          <a className="md:text-5xl lg:ml-30 mr-6 text-3xl font-bold cursor-pointer mt-2 gradient-text">efficiEncia</a>
         </div>
         <div className="navbar-end md:w-full">
           <div className="hidden lg:flex">
@@ -63,14 +65,19 @@ function Navbar() {
           
           
             {/* moon icon */}
-            <svg className="swap-on fill-current wd-5 h-8  md:w-10 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <svg className="swap-on fill-current wd-5 h-8 md:w-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
   </svg>
           
         </label>
+        {
+          authUser?(<Logout/>):(
         <div className='lg:flex'>
-          <a className="bg-black md:text-2xl text-white  lg:ml-3 px-2 py-1 md:h-12 md:w-18 mr-3 text-2xl ml-2 pt-2 h-12   md:mr-1 rounded-md hover:bg-slate-800 duration-300 cursor-pointer">Login</a>
+          <a className="bg-black md:text-2xl text-white lg:ml-3 px-2 py-1 md:h-12 md:w-18 mr-3 text-2xl ml-2 pt-2 h-12 md:mr-1 rounded-md hover:bg-slate-800 duration-300 cursor-pointer" onClick={() => document.getElementById("my_modal_3").showModal()}>Login</a>
+          <Login />
         </div>
+        )}
+        
       </div>
     </div>
   );
