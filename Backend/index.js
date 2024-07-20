@@ -1,16 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors'; // Import cors middleware
 import userRoute from './route/user.route.js';
-import cors from "cors"; // Import cors middleware
+import dashboardRoute from './route/dashboard.route.js'; // Import the dashboard route
 
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // Use the cors middleware
+app.use(cors({
+  origin:["https://deploy-mern-1whq.vercel.app"],
+  methods:["POST","GET"],
+  credentials:true
+})); // Use the cors middleware
 dotenv.config();
 const PORT = process.env.PORT || 1106;
-const URI = process.env.MongoDBURI;
+const URI =  process.env.MongoDBURI;;
 
 mongoose.connect(URI)
   .then(() => console.log("Connected to MongoDB"))
@@ -23,6 +28,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/user", userRoute);
+app.use("/dashboard", dashboardRoute); // Add this line to use the dashboard routes
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
