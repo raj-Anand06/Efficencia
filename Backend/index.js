@@ -8,10 +8,14 @@ import dashboardRoute from './route/dashboard.route.js'; // Import the dashboard
 const app = express();
 
 app.use(express.json());
-app.use(cors()); // Use the cors middleware
+app.use(cors({
+  origin:["https://deploy-mern-1whq.vercel.app"],
+  methods:["POST","GET"],
+  credentials:true
+})); // Use the cors middleware
 dotenv.config();
 const PORT = process.env.PORT || 1106;
-const URI = process.env.MongoDBURI;
+const URI =  process.env.MongoDBURI;;
 
 mongoose.connect(URI)
   .then(() => console.log("Connected to MongoDB"))
