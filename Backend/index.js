@@ -1,8 +1,9 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
+import cors from 'cors'; // Import cors middleware
 import userRoute from './route/user.route.js';
-import cors from "cors"; // Import cors middleware
+import dashboardRoute from './route/dashboard.route.js'; // Import the dashboard route
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/user", userRoute);
+app.use("/dashboard", dashboardRoute); // Add this line to use the dashboard routes
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

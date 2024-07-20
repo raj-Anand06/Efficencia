@@ -3,12 +3,10 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import UseCodeforcesUser from './UseCodeforcesUser';
 import $ from 'jquery';
 
-function QsnFetcher() {
+function QsnFetcher({ placeholderTodos, setPlaceholderTodos, completedCount, updateCompletedCount }) {
   const [placeholderTitle, setPlaceholderTitle] = useState('');
   const [placeholderUserID, setPlaceholderUserID] = useState('');
-  const [placeholderTodos, setPlaceholderTodos] = useState([]);
   const [solvedLinks, setSolvedLinks] = useState(new Set());
-  const [completedCount, setCompletedCount] = useState(0);
 
   const handleAddTodo = () => {
     const newTodoItem = { id: Date.now(), title: placeholderTitle, userID: placeholderUserID };
@@ -45,11 +43,6 @@ function QsnFetcher() {
 
   const changeUser = UseCodeforcesUser(setPlaceholderUserID, fetchSolvedProblems);
 
-  const updateCompletedCount = () => {
-    const count = placeholderTodos.filter((todo) => solvedLinks.has(todo.title)).length;
-    setCompletedCount(count);
-  };
-
   useEffect(() => {
     const savedTodos = JSON.parse(localStorage.getItem('placeholderTodos'));
     const savedUserID = localStorage.getItem('placeholderUserID');
@@ -69,11 +62,12 @@ function QsnFetcher() {
   }, [placeholderUserID, placeholderTodos]);
 
   useEffect(() => {
-    updateCompletedCount();
-  }, [solvedLinks, placeholderTodos]);
+    const count = placeholderTodos.filter((todo) => solvedLinks.has(todo.title)).length;
+    updateCompletedCount(count);
+  }, [solvedLinks, placeholderTodos, updateCompletedCount]);
 
   return (
-    <div className="bg-gray-800 border ml-2 mt-2 md:ml-12 border-gray-600 p-6 rounded-lg shadow-lg w-full max-w-2xl overflow-y-auto md:h-96">
+    <div className="bg-gray-800 border ml-2 mt-2 md:mt-4 md:ml-12 border-gray-600 p-6 rounded-lg shadow-lg w-full max-w-2xl overflow-y-auto md:h-96 max-h-[80vh]">
       <div className="bg-gray-800 border border-gray-600 p-6 rounded-lg shadow-lg">
         <input
           type="text"

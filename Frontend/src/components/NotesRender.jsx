@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './NotesList';
 import Search from './Search';
+import Navbar from './Navbar';
 
 
 const NotesRender = () => {
@@ -57,7 +58,7 @@ const NotesRender = () => {
 
     return (
         <>
-            
+            <Navbar/>
             <div className='container1'>
                 <Search handleSearchNote={(searchText) => console.log(searchText)} />
                 <NotesList

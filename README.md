@@ -1,1 +1,0 @@
-# Efficencia_grow_faster
