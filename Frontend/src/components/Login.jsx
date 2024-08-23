@@ -17,7 +17,7 @@ function Login() {
       password: data.password,
     };
     await axios
-      .post("http://localhost:1402/user/login", userInfo)
+      .post("https://efficencia-api.vercel.app/", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
