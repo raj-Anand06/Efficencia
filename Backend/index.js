@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin:["https://deploy-mern-1whq.vercel.app"],
+  origin:"*",
   methods:["POST","GET"],
   credentials:true
 })); // Use the cors middleware
@@ -33,3 +33,8 @@ app.use("/dashboard", dashboardRoute); // Add this line to use the dashboard rou
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+app.get("/", (req, res) => {
+    return res.json({
+      success: true, message: "server up and running"})
+    });
