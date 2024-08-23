@@ -22,11 +22,11 @@ function Signup() {
       password: data.password,
     };
     await axios
-      .post("https://efficencia-api.vercel.app/", userInfo)
+      .post("https://efficencia-api.vercel.app", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
-          toast.success("Signup Successfully");
+          toast.success("Signup Succesfull");
           navigate(from, { replace: true });
         }
         localStorage.setItem("Users", JSON.stringify(res.data.user));
