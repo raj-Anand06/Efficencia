@@ -22,7 +22,7 @@ function Signup() {
       password: data.password,
     };
     await axios
-      .post("https://efficencia-api.vercel.app", userInfo)
+      .post("https://efficencia-api.vercel.app/signup", userInfo)
       .then((res) => {
         console.log(res.data);
         if (res.data) {
