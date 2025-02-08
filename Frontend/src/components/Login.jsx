@@ -11,32 +11,39 @@ function Login() {
     formState: { errors },
   } = useForm();
 
+  // Use the environment variable. 
+  // For Create React App:
+  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:1402";
+  // For Vite, you would instead use:
+  // const baseURL = import.meta.env.VITE_API_URL || "http://localhost:1402";
+
   const onSubmit = async (data) => {
     const userInfo = {
       email: data.email,
       password: data.password,
     };
-    await axios
-      .post("https://efficencia-api.vercel.app/user/login", userInfo)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          toast.success("Loggedin Successfully");
-          document.getElementById("my_modal_3").close();
-          setTimeout(() => {
-            window.location.reload();
-            localStorage.setItem("Users", JSON.stringify(res.data.user));
-          }, 1000);
-        }
-        localStorage.setItem("Users", JSON.stringify(res.data.user));
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err);
-          toast.error("Error: " + err.response.data.message);
-          setTimeout(() => {}, 2000);
-        }
+    try {
+      const res = await axios.post(`${baseURL}/user/login`, userInfo, {
+        withCredentials: true, // include credentials if needed
       });
+      console.log(res.data);
+      if (res.data) {
+        toast.success("Logged in Successfully");
+        document.getElementById("my_modal_3").close();
+        setTimeout(() => {
+          localStorage.setItem("Users", JSON.stringify(res.data.user));
+          window.location.reload();
+        }, 1000);
+      }
+      localStorage.setItem("Users", JSON.stringify(res.data.user));
+    } catch (err) {
+      if (err.response) {
+        console.error(err);
+        toast.error("Error: " + err.response.data.message);
+      } else {
+        toast.error("An error occurred");
+      }
+    }
   };
 
   return (
@@ -95,7 +102,7 @@ function Login() {
                   className="underline text-blue-500 cursor-pointer"
                 >
                   Signup
-                </Link>{" "}
+                </Link>
               </p>
             </div>
           </form>
