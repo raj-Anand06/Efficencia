@@ -8,7 +8,7 @@ export const EfficiencyProvider = ({ children }) => {
 
   return (
     <EfficiencyContext.Provider value={{ totalEfficiency, setTotalEfficiency }}>
-      {children}//new
+      {children}
     </EfficiencyContext.Provider>
   );
 };
