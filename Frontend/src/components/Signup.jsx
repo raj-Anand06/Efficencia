@@ -16,7 +16,8 @@ function Signup() {
   } = useForm();
 
   // Use Vite's way to access environment variables.
-  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:1402";
+ const baseURL = "https://efficencia-le5p.vercel.app/";
+
 
   const onSubmit = async (data) => {
     const userInfo = {
