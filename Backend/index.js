@@ -9,10 +9,11 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-  origin:"*",
-  methods:["POST","GET"],
-  credentials:true
-})); // Use the cors middleware
+  origin: "https://efficencia.vercel.app", // Use your frontend domain
+  methods: ["POST", "GET"],
+  credentials: true
+}));
+
 dotenv.config();
 const PORT = process.env.PORT || 1106;
 const URI =  process.env.MongoDBURI;;
