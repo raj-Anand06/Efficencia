@@ -11,7 +11,7 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  const baseURL = "https://efficencia-le5p.vercel.app/";
+  const baseURL = "https://efficencia-le5p.vercel.app";
 
 
   const onSubmit = async (data) => {
