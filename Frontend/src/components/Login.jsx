@@ -11,11 +11,8 @@ function Login() {
     formState: { errors },
   } = useForm();
 
-  // Use the environment variable. 
-  // For Create React App:
-  const baseURL = import.meta.env.VITE_API_URL || "http://localhost:1402";
-  // For Vite, you would instead use:
-  // const baseURL = import.meta.env.VITE_API_URL || "http://localhost:1402";
+  const baseURL = "https://efficencia-le5p.vercel.app/";
+
 
   const onSubmit = async (data) => {
     const userInfo = {
