@@ -1,10 +1,9 @@
-// route/dashboard.route.js
-import express from 'express';
-import { saveEfficiencyData, getEfficiencyData } from '../controller/dashboard.controller.js';
+import { Router } from 'express';
+import { getEfficiencyData } from '../controller/dashboard.controller.js';
+import { requireAuth } from '../middleware/auth.middleware.js';
 
-const router = express.Router();
+const router = Router();
 
-router.post('/efficiency', saveEfficiencyData);
-router.get('/efficiency', getEfficiencyData);
+router.get('/efficiency', requireAuth, getEfficiencyData);
 
 export default router;

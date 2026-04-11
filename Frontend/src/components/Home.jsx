@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import AppShell from './layout/AppShell.jsx';
 
 
 function QuoteSection() {
@@ -17,7 +17,7 @@ function QuoteSection() {
 
   return (
     <div className="quote-section text-center">
-      <p className="text-xl font-semibold">{quote}</p>
+      <p className="app-copy text-xl font-semibold leading-8">{quote}</p>
     </div>
   );
 }
@@ -34,21 +34,43 @@ function Home() {
     }, []);
 
   return (
-    <>
-      <Navbar/>
-      <h1 className="md:font-serif mr-6 font-serif mt-40 font-bold md:pt-13  lg:ml-32 pl-12 text-3xl  md:text-6xl">Efficiencia: Master Your Day</h1>
-      <p className='md:font-serif font-serif lg:ml-32 pl-12 md:mt-4 mt-3 text-1xl md:text-2xl'>Where Your Daily To-Dos Transform into Daily Triumphs</p>
-      {/* TIME */}
-      <div className="card pl-10 ml-6 md:ml-40 w-52  transform translate-x-5 mt-5 md:w-60 h-32 bg-gradient-to-r from-red-300 to-blue-300">
-        <div className="card-body flex text-white items-center justify-center mr-12 flex-auto font-bold text-5xl ">
-          <div id="time" className="font-sans">{currentTime}</div>
+    <AppShell contentClassName="pt-10 md:pt-16">
+      <section className="grid gap-8 lg:grid-cols-[1.25fr_0.85fr] lg:items-center">
+        <div className="space-y-6 px-2 md:px-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-cyan-500 dark:text-cyan-300/80">
+            Personal Productivity System
+          </p>
+          <h1 className="app-heading font-serif text-4xl font-bold md:text-6xl">
+            Efficiencia: Master Your Day
+          </h1>
+          <p className="app-copy max-w-2xl font-serif text-lg leading-8 md:text-2xl">
+            Where your daily to-dos, coding practice, and consistency metrics
+            come together in one focused workspace.
+          </p>
         </div>
-      </div>
-      <div className='mt-64 md:mt-36'>
-      <QuoteSection />
-      </div>
-      
-    </>
+
+        <div className="space-y-5">
+          <div className="app-card-strong rounded-[32px] p-6 md:p-8">
+            <p className="app-subtle-copy text-xs uppercase tracking-[0.28em]">
+              Live Clock
+            </p>
+            <div
+              id="time"
+              className="app-heading mt-5 font-sans text-5xl font-bold md:text-6xl"
+            >
+              {currentTime}
+            </div>
+          </div>
+
+          <div className="app-card rounded-[28px] p-6">
+            <p className="app-subtle-copy mb-3 text-xs uppercase tracking-[0.28em]">
+              Daily Note
+            </p>
+            <QuoteSection />
+          </div>
+        </div>
+      </section>
+    </AppShell>
   );
 }
 

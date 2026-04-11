@@ -3,7 +3,7 @@ import { MdSearch } from 'react-icons/md';
 
 const Search = ({ handleSearchNote }) => {
 	return (
-		<div className='search'>
+		<div className='search dashboard-muted'>
 			<MdSearch className='search-icons' size='1em' />
 			<input
 				onChange={(event) =>

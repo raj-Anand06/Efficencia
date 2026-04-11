@@ -24,7 +24,7 @@ const getCookie = (cname) => {
   return "";
 };
 
-const useCodeforcesUser = (setPlaceholderUserID, fetchSolvedProblems) => {
+const useCodeforcesUser = (setPlaceholderUserID, setSolvedProblems) => {
   const validateUsername = useCallback((username) => {
     const url = `https://codeforces.com/api/user.info?handles=${username}`;
     const timer = setTimeout(() => {
@@ -32,12 +32,31 @@ const useCodeforcesUser = (setPlaceholderUserID, fetchSolvedProblems) => {
       validateUsername(username);
     }, 5000);
     $.getJSON(url, (data) => {
-      clearInterval(timer);
+      clearTimeout(timer);
       setCookie("cf_username", username, 1);
       setPlaceholderUserID(username);
       fetchSolvedProblems(username);
     });
-  }, [setPlaceholderUserID, fetchSolvedProblems]);
+  }, [setPlaceholderUserID]);
+
+  const fetchSolvedProblems = useCallback((username) => {
+    const url = `https://codeforces.com/api/user.status?handle=${username}`;
+    $.getJSON(url, (data) => {
+      if (data.status === "OK") {
+        const submissions = data.result;
+        const solvedProblems = new Set();
+        submissions.forEach((submission) => {
+          if (submission.verdict === "OK") {
+            const problemId = `${submission.problem.contestId}-${submission.problem.index}`;
+            solvedProblems.add(problemId);
+          }
+        });
+        setSolvedProblems(Array.from(solvedProblems));
+      } else {
+        console.error("Failed to fetch submissions:", data.comment);
+      }
+    });
+  }, [setSolvedProblems]);
 
   useEffect(() => {
     const username = getCookie("cf_username");
@@ -48,7 +67,7 @@ const useCodeforcesUser = (setPlaceholderUserID, fetchSolvedProblems) => {
       setPlaceholderUserID(username);
       fetchSolvedProblems(username);
     }
-  }, [setPlaceholderUserID, fetchSolvedProblems, validateUsername]);
+  }, [setPlaceholderUserID, validateUsername, fetchSolvedProblems]);
 
   const changeUser = useCallback(() => {
     const newUsername = prompt("Enter your new Codeforces username");

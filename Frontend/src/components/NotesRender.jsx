@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import NotesList from './NotesList';
 import Search from './Search';
-import Navbar from './Navbar';
+import AppShell from './layout/AppShell.jsx';
 
 
 const NotesRender = () => {
@@ -57,9 +57,8 @@ const NotesRender = () => {
     console.log('Current notes state:', notes);
 
     return (
-        <>
-            <Navbar/>
-            <div className='container1'>
+        <AppShell contentClassName="pt-8">
+            <div className='container1 app-copy'>
                 <Search handleSearchNote={(searchText) => console.log(searchText)} />
                 <NotesList
                     notes={notes}
@@ -67,7 +66,7 @@ const NotesRender = () => {
                     handleDeleteNote={deleteNote}
                 />
             </div>
-        </>
+        </AppShell>
     );
 };
 
